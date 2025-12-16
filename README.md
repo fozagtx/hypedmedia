@@ -12,6 +12,44 @@ npm install -g rayban-metadata
 npx rayban-metadata <command>
 ```
 
+## Local Development / Run Without Installation
+
+To run directly from the source code without building or installing:
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd rayban-metadata
+
+# Install dependencies
+npm install
+
+# Method 1: Direct execution (recommended)
+node rayban-cli.js add /path/to/video.mp4 --front
+
+# Method 2: Using npm scripts
+npm run dev:cli -- add /path/to/video.mp4 --front
+
+# Method 3: Build and run
+npm run dev:start -- add /path/to/video.mp4 --front
+```
+
+### Key Scripts
+
+- `npm run dev:cli` - Run CLI directly from TypeScript source using ts-node
+- `npm run dev:start` - Build TypeScript then run the CLI
+- `node rayban-cli.js` - Smart wrapper that detects dev vs built mode
+
+### What This Solves
+
+The issue was that users couldn't run `node dist/cli.js` without first building the TypeScript files. Now users can:
+
+1. Clone the repo
+2. Run `npm install`  
+3. Run the CLI immediately with `node rayban-cli.js`
+
+The wrapper automatically detects if you're in development (TypeScript source exists) and uses `ts-node`, or if built files exist and uses those.
+
 ## Quick Start
 
 ```bash
